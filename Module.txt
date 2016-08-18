@@ -1,10 +1,10 @@
 ﻿Name: Dcmg.CustomerDB
 AntiForgery: enabled
-Author: The Orchard Team
-Website: http://orchardproject.net
+Author: Alan Peake
+Website: http://dcmgllc.com
 Version: 1.0
 OrchardVersion: 1.0
-Description: Description for the module
+Description: DCMG LLC Customer DB Module
 Features:
     Dcmg.CustomerDB:
-        Description: Description for feature Dcmg.CustomerDB.
+        Description: Main Feature for DCMG DB

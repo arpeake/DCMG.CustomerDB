@@ -12,7 +12,7 @@ namespace Dcmg.CustomerDB
         {
             //Creating initial Customer DB
             SchemaBuilder.CreateTable("Customers", table => table
-             .Column("id",System.Data.DbType.Int32,col=>col.PrimaryKey().Identity())
+             .Column("Id",System.Data.DbType.Int32,col=>col.PrimaryKey().Identity())
              .Column("Name",System.Data.DbType.String)
              .Column("Address",System.Data.DbType.String)
              .Column("PhoneNumber",System.Data.DbType.String)

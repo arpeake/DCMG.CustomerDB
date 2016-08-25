@@ -11,8 +11,8 @@ namespace Dcmg.CustomerDB
         public int Create()
         {
             //Creating initial Customer DB
-            SchemaBuilder.CreateTable("Customers", table => table
-             .Column("Id",System.Data.DbType.Int32,col=>col.PrimaryKey().Identity())
+            SchemaBuilder.CreateTable("CustomersPartRecord", table => table
+             .ContentPartRecord()
              .Column("Name",System.Data.DbType.String)
              .Column("Address",System.Data.DbType.String)
              .Column("PhoneNumber",System.Data.DbType.String)
@@ -26,5 +26,6 @@ namespace Dcmg.CustomerDB
 
             return 1;
         }
+
     }
 }

@@ -1,0 +1,114 @@
+﻿@model Dcmg.CustomerDB.ViewModels.CustomersViewModel
+<h1>Customers</h1>
+@Model.Name
+
+
+<script type="text/javascript">
+	window.onload=function(){
+	var tfrow = document.getElementById('tfhover').rows.length;
+	var tbRow=[];
+	for (var i=1;i<tfrow;i++) {
+		tbRow[i]=document.getElementById('tfhover').rows[i];
+		tbRow[i].onmouseover = function(){
+		    this.style.backgroundColor = '#0093D5';
+		};
+		tbRow[i].onmouseout = function() {
+		    this.style.backgroundColor = '#3678BE';
+		};
+	}
+};
+</script>
+
+<style type="text/css">
+    table.tftable {
+        font-size: 12px;
+        color: #333333;
+        width: 100%;
+        border-width: 1px;
+        border-color: #729ea5;
+        border-collapse: collapse;
+    }
+
+        table.tftable th {
+            font-size: 12px;
+            background-color: #2B5F96;
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #729ea5;
+            text-align: left;
+            color: #FFF
+            
+        }
+
+        table.tftable tr {
+            background-color: #3678BE;
+        }
+
+        table.tftable td {
+            font-size: 12px;
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #729ea5;
+            color: #FFF
+        }
+</style>
+
+
+<table id="tfhover" class="tftable" border="1">
+    @if (Model.CVML.Count() > 0)
+    {
+        <tr>
+            <th>Record Id</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>PhoneNumber</th>
+            <th>PrimaryPOC</th>
+            <th>PrimaryPOCEmail</th>
+            <th>SecondaryPOC</th>
+            <th>SecondaryPOCEmail</th>
+            <th>EmailAlias</th>
+            <th>Notes</th>
+            <th>Action</th>
+        </tr>
+        foreach (Dcmg.CustomerDB.Models.CustomersPartRecord cpr in Model.CVML)
+        {
+            <tr>           
+                <td>
+                    @cpr.Id
+                </td>     
+                <td>
+                    @cpr.Name
+                </td>
+                <td>
+                    @cpr.Address
+                </td>
+                <td>
+                    @cpr.PhoneNumber
+                </td>
+                <td>
+                    @cpr.PrimaryPOC
+                </td>
+                <td>
+                    @cpr.PrimaryPOCEmail
+                </td>
+                <td>
+                    @cpr.SecondaryPOC
+                </td>
+                <td>
+                    @cpr.SecondaryPOCEmail
+                </td>
+                <td>
+                    @cpr.EmailAlias
+                </td>
+                <td>
+                    @cpr.Notes
+                </td>
+                <td>
+                    @Html.ActionLink("Add","Add","Customers") Edit Delete @cpr.Id
+                </td>
+            </tr>
+        }
+    }
+</table>

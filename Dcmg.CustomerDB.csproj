@@ -99,8 +99,8 @@
     <Content Include="Assets\Styles.less" />
     <Content Include="Styles\Styles.css" />
     <Content Include="Styles\Styles.min.css" />
-    <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
+    <Content Include="Styles\StyleSheet1.css" />
     <Content Include="Styles\Web.config" />
     <Content Include="Properties\AssemblyInfo.cs" />
     <Content Include="Module.txt" />
@@ -120,16 +120,15 @@
   <ItemGroup>
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Drivers\CustomersPartDriver.cs" />
     <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="Handlers\CustomersHandler.cs" />
+    <Compile Include="Handlers\CustomersPartHandler.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\CustomersPart.cs" />
     <Compile Include="Models\CustomersPartRecord.cs" />
     <Compile Include="ViewModels\CustomersViewModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Drivers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Views\Customers\Index.cshtml" />
   </ItemGroup>
@@ -139,6 +138,9 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Views\Customers\Add.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web - Copy.config.bak" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

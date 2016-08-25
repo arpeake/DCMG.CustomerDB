@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using Dcmg.CustomerDB.Models;
+
+
 
 
 namespace Dcmg.CustomerDB.ViewModels
 {
     public class CustomersViewModel
     {        
-        public new int Id { get; }
+        public int Id { get; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
@@ -18,6 +22,7 @@ namespace Dcmg.CustomerDB.ViewModels
         public string SecondaryPOCEmail { get; set; }
         public string EmailAlias { get; set; }
         public string Notes { get; set; }
+        public List<CustomersPartRecord> CVML { get; set; }
     }
     
 }

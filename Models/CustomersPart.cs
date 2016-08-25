@@ -8,11 +8,6 @@ namespace Dcmg.CustomerDB.Models
 {
     public class CustomersPart : ContentPart<CustomersPartRecord>
     {
-        public new int Id
-        {
-            get { return Record.Id; }
-        }
-
         public string Name
         {
             get { return Record.Name; }

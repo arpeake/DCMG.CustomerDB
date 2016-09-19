@@ -1,0 +1,144 @@
+﻿@model Dcmg.CustomerDB.Models.CustomersPartRecord
+@*@inherits System.Web.Mvc.WebViewPage<dynamic>*@
+
+<h1>Add Customers</h1>
+<script type="text/javascript">
+	window.onload=function(){
+	var tfrow = document.getElementById('tfhover').rows.length;
+	var tbRow=[];
+	for (var i=1;i<tfrow;i++) {
+		tbRow[i]=document.getElementById('tfhover').rows[i];
+		tbRow[i].onmouseover = function(){
+		    this.style.backgroundColor = '#0093D5';
+		};
+		tbRow[i].onmouseout = function() {
+		    this.style.backgroundColor = '#3678BE';
+		};
+	}
+};
+</script>
+
+<style type="text/css">
+    table.tftable {
+        font-size: 12px;
+        color: #333333;
+        width: 100%;
+        border-width: 1px;
+        border-color: #729ea5;
+        border-collapse: collapse;
+    }
+
+        table.tftable th {
+            font-size: 12px;
+            background-color: #2B5F96;
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #729ea5;
+            text-align: left;
+            color: #FFF;
+        }
+
+        table.tftable tr {
+            background-color: #3678BE;
+        }
+
+        table.tftable td {
+            font-size: 12px;
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #729ea5;
+            color: #FFF;
+        }
+
+    input[type="text"] {
+        resize: both;
+        width: 100px;
+        height: 30px;
+    }
+
+        input[type="text"]:active {
+            width: auto;
+            height: auto;
+        }
+
+        input[type="text"]:focus {
+            min-width: 200px;
+            min-height: 50px;
+        }
+
+        textarea {
+                resize: both;
+                width: 100px;
+                height: 50px;
+            }
+
+        textarea:active {
+            width: auto;
+            /*height: auto;*/
+        }
+
+        textarea:focus {
+            min-width: 200px;
+            min-height: 50px;
+        }
+</style>
+
+
+
+<div id="AddCustomer">
+    @using (Html.BeginFormAntiForgeryPost(Url.Action("Edit", "Customers", new { area = "Dcmg.CustomerDB" })))
+    {
+        <table id="tfhover" class="tftable" border="1">
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>PhoneNumber</th>
+                <th>PrimaryPOC</th>
+                <th>PrimaryPOCEmail</th>
+                <th>SecondaryPOC</th>
+                <th>SecondaryPOCEmail</th>
+                <th>EmailAlias</th>
+                <th>Notes</th>
+            </tr>
+            @Html.HiddenFor(x => x.Id);
+            <tr>
+                <td>
+                    <input type="text" name="txtName" id="txtName" value="@Model.Name" />
+                </td>
+                <td>
+                    <textarea name="txtAddress" cols="100" rows="3" >@Model.Address</textarea>
+                    @*<input type="text" name="txtAddress" id="txtAddress" value="@Model.Address" />*@
+                </td>
+                <td>
+                    <input type="text" name="txtPhoneNumber" id="txtPhoneNumber" value="@Model.PhoneNumber" />
+                </td>
+                <td>
+                    <input type="text" name="txtPrimaryPOC" id="txtPrimaryPOC" value="@Model.PrimaryPOC" />
+                </td>
+                <td>
+                    <input type="text" name="txtPrimaryPOCEmail" id="txtPrimaryPOCEmail" value="@Model.PrimaryPOCEmail" />
+                </td>
+                <td>
+                    <input type="text" name="txtSecondaryPOC" id="txtSecondaryPOC" value="@Model.SecondaryPOC" />
+                </td>
+                <td>
+                    <input type="text" name="txtSecondaryPOCEmail" id="txtSecondaryPOCEmail" value="@Model.SecondaryPOCEmail" />
+                </td>
+                <td>
+                    <input type="text" name="txtEmailAlias" id="txtEmailAlias" value="@Model.EmailAlias" />
+                </td>
+                <td>
+                    <input type="text" name="txtNotes" id="txtNotes" value="@Model.Notes" />
+                </td>
+            </tr>
+        </table>        
+        
+        <br />
+            <input type="submit" id="btnSubmit" value="Submit" />
+
+    }
+
+
+</div>

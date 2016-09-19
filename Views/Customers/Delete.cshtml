@@ -1,0 +1,17 @@
+﻿@model Dcmg.CustomerDB.Models.CustomersPartRecord
+
+<h1>Delete?</h1>
+
+<p>
+    <h2>Are you sure you want to delete?</h2>
+</p>
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Delete", "Customers", new { area = "Dcmg.CustomerDB" })))
+{
+    @Html.HiddenFor(x=>x.Id)
+    @Html.DisplayForModel()
+    <br/>
+    <br/>
+    <input type="submit" name="btnSubmit" id="btnSubmit" value="Delete" />
+    <input type="submit" name="btnSubmit" id="btnSubmit" value="Cancel" />
+}

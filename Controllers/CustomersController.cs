@@ -46,7 +46,13 @@ namespace Dcmg.CustomerDB.Controllers
                 cvm.Name = ex.Message +Environment.NewLine + "//End Of Message//";
             }
             
-            
+            if(cvm.CVML.Count() < 1)
+            {
+                CustomersPartRecord cvm2 = new CustomersPartRecord();
+
+                cvm2.Name = "Add 1st Customer";
+                cvm.CVML.Add(cvm2);
+            }
             
             //cvm = cpl.CastClass<CustomersViewModel>();
             
@@ -56,11 +62,26 @@ namespace Dcmg.CustomerDB.Controllers
 
         [Themed]
         [HttpPost]
-        public ActionResult Add(string txtName)
+        public ActionResult Add(string txtName,string txtAddress, string txtPhoneNumber
+            ,string txtPrimaryPOC, string txtPrimaryPOCEmail, string txtSecondaryPOC
+            ,string txtSecondaryPOCEmail, string txtEmailAlias, string txtNotes)
         {
-            CustomersViewModel cvm = new CustomersViewModel();
-            cvm.Name = txtName;
-            return View("Index",cvm);
+            //Create the record
+            _services.ContentManager.Create<CustomersPart>("CustomersPartRecord", x =>
+            {
+                x.Name = txtName;
+                x.Address = txtAddress;
+                x.PhoneNumber = txtPhoneNumber;
+                x.PrimaryPOC = txtPrimaryPOC;
+                x.PrimaryPOCEmail = txtPrimaryPOCEmail;
+                x.SecondaryPOC = txtSecondaryPOC;
+                x.SecondaryPOCEmail = txtSecondaryPOCEmail;
+                x.EmailAlias = txtEmailAlias;
+                x.Notes = txtNotes;
+            });
+            
+            
+            return RedirectToAction("Index");
         }
 
         [Themed]
@@ -69,5 +90,85 @@ namespace Dcmg.CustomerDB.Controllers
         {           
             return View();
         }
+
+        [Themed]
+        [HttpGet]
+        public ActionResult Edit(int rid)
+        {
+            //get record of the ID to populate fields
+            var record = _customerRepo.Table.Where(x => x.Id == rid).FirstOrDefault();
+            
+            return View(record);
+        }
+
+        [Themed]
+        [HttpPost]
+        public ActionResult Edit(int Id,string txtName, string txtAddress, string txtPhoneNumber
+            , string txtPrimaryPOC, string txtPrimaryPOCEmail, string txtSecondaryPOC
+            , string txtSecondaryPOCEmail, string txtEmailAlias, string txtNotes)
+        {
+            //get record of the ID to populate fields
+            CustomersPartRecord cpr = new CustomersPartRecord();
+            cpr.Id = Id;
+            cpr.Name = txtName;
+            cpr.Address = txtAddress;
+            cpr.PhoneNumber = txtPhoneNumber;
+            cpr.PrimaryPOC = txtPrimaryPOC;
+            cpr.PrimaryPOCEmail = txtPrimaryPOCEmail;
+            cpr.SecondaryPOC = txtSecondaryPOC;
+            cpr.SecondaryPOCEmail = txtSecondaryPOCEmail;
+            cpr.EmailAlias = txtEmailAlias;
+            cpr.Notes = txtNotes;
+
+            try
+            {
+                _customerRepo.Update(cpr);
+            }
+            catch(NullReferenceException)
+            {
+                
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        
+        [Themed]
+        [HttpGet]
+        public ActionResult Delete(int rid)
+        {
+            try
+            {
+                var record = _customerRepo.Get(r => r.Id == rid);
+                return View(record);
+
+            }
+            catch (NullReferenceException)
+            {
+                return View("Index");
+            }
+
+            
+        }
+
+        
+        [Themed]
+        [HttpPost]
+        public ActionResult Delete(CustomersPartRecord cpr,string btnSubmit)
+        {
+            if(btnSubmit.ToUpper() == "DELETE")
+            {
+                try
+                {
+                    var record = _customerRepo.Get(r => r.Id == cpr.Id);
+                    _customerRepo.Delete(record);
+                }
+                catch (NullReferenceException) { }
+            }
+            
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
